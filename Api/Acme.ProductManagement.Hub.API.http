@@ -1,0 +1,6 @@
+@Acme.ProductManagement.Hub.API_HostAddress = http://localhost:5099
+
+GET {{Acme.ProductManagement.Hub.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
