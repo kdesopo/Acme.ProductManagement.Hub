@@ -11,6 +11,8 @@ builder.Services.AddSwaggerGen();
 
 // Service Extensions
 builder.Services.ConfigureDatabases(builder.Configuration, builder.Environment);
+builder.Services.ConfigureRepositories();
+builder.Services.ConfigureServiceLayer();
 
 var app = builder.Build();
 

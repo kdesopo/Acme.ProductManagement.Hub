@@ -1,4 +1,6 @@
 ﻿using Acme.ProductManagement.Data.Contexts;
+using Acme.ProductManagement.Data.Repositories;
+using Acme.ProductManagement.Data.Repositories.Interfaces;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -21,9 +23,22 @@ namespace Acme.ProductManagement.Api.Startup
                 if (env.IsEnvironment("Local"))
                 {
                     options.LogTo(Console.WriteLine, LogLevel.Information).EnableSensitiveDataLogging();
-                };
+                }
+                ;
             });
-            
+
+            return services;
+        }
+
+        public static IServiceCollection ConfigureRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IProductRepository, ProductRepository>();
+            return services;
+        }
+
+        public static IServiceCollection ConfigureServiceLayer(this IServiceCollection services)
+        {
+            // TODO: Wire up service layer once implemented
             return services;
         }
     }
