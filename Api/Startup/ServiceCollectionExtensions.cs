@@ -1,5 +1,7 @@
 ﻿using Acme.ProductManagement.Data.Contexts;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Acme.ProductManagement.Api.Startup
 {
     /// <summary>
@@ -14,7 +16,7 @@ namespace Acme.ProductManagement.Api.Startup
         {
             services.AddDbContext<ProductManagementContext>(options =>
             {
-                //options.UseSqlite();
+                options.UseSqlite("Data Source=AcmeProductManagement.db");
 
                 if (env.IsEnvironment("Local"))
                 {
