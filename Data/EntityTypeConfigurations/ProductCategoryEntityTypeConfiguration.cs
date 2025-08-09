@@ -13,8 +13,7 @@ public class ProductCategoryEntityTypeConfiguration : IEntityTypeConfiguration<P
         builder.Property(pc => pc.Id)
             .ValueGeneratedOnAdd();
         builder.Property(pc => pc.Name)
-            .IsRequired()
-            .HasMaxLength(100);
+            .IsRequired();
         builder.HasMany(pc => pc.Products)
             .WithOne(p => p.ProductCategory)
             .HasForeignKey(p => p.ProductCategoryId)

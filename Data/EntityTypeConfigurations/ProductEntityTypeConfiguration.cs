@@ -14,17 +14,14 @@ public class ProductEntityTypeConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.Id)
             .ValueGeneratedOnAdd();
         builder.Property(p => p.Name)
-            .IsRequired()
-            .HasMaxLength(200);
+            .IsRequired();
         builder.Property(p => p.Code)
-            .IsRequired()
-            .HasMaxLength(50);
+            .IsRequired();
         builder.Property(p => p.Price)
             .HasColumnType("decimal(18,2)");
         builder.Property(p => p.SKU)
-            .IsRequired()
-            .HasMaxLength(100);
-        builder.Property(p => p.Quantity)
+            .IsRequired();
+        builder.Property(p => p.StockQuantity)
             .IsRequired();
         builder.Property(p => p.DateAdded)
             .IsRequired()
