@@ -16,6 +16,13 @@ public class ProductRepository(ProductManagementContext productManagementContext
             .ToListAsync();
     }
 
+    public async Task<Product?> GetProductByIdAsync(int id)
+    {
+        return await productManagementContext.Product
+            .Include(p => p.ProductCategory)
+            .FirstOrDefaultAsync(p => p.Id == id);
+    }
+
     public async Task AddProductAsync(Product product)
     {
         await productManagementContext.AddAsync(product);

@@ -11,14 +11,38 @@ public class ProductService(IProductRepository productRepository) : IProductServ
 
         return products.Select(product => new ProductResponseDto
         {
+            Id = product.Id,
             Name = product.Name,
             Code = product.Code,
             Price = product.Price,
             SKU = product.SKU,
-            Quantity = product.Quantity,
+            StockQuantity = product.StockQuantity,
             DateAdded = product.DateAdded,
             Category = product.ProductCategory.Name
         });
+    }
+
+    public async Task<ProductResponseDto?> GetProductByIdAsync(int id)
+    {
+        var product = await productRepository.GetProductByIdAsync(id);
+
+        if (product == null)
+        {
+            return null;
+        }
+
+        return new ProductResponseDto
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Code = product.Code,
+            Price = product.Price,
+            SKU = product.SKU,
+            StockQuantity = product.StockQuantity,
+            DateAdded = product.DateAdded,
+            Category = product.ProductCategory.Name
+        };
+
     }
 
     public async Task<ProductResponseDto> RegisterNewProductAsync(ProductCreateRequestDto requestDto)
@@ -29,7 +53,7 @@ public class ProductService(IProductRepository productRepository) : IProductServ
             Code = requestDto.Code,
             Price = requestDto.Price,
             SKU = requestDto.SKU,
-            Quantity = requestDto.Quantity,
+            StockQuantity = requestDto.StockQuantity,
             ProductCategoryId = requestDto.CategoryId
         };
 
@@ -37,11 +61,12 @@ public class ProductService(IProductRepository productRepository) : IProductServ
 
         return new ProductResponseDto
         {
+            Id = product.Id,
             Name = product.Name,
             Code = product.Code,
             Price = product.Price,
             SKU = product.SKU,
-            Quantity = product.Quantity,
+            StockQuantity = product.StockQuantity,
             DateAdded = product.DateAdded,
             Category = product.ProductCategory.Name
         };
