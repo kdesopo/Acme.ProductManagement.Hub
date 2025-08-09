@@ -58,6 +58,7 @@ public class ProductService(IProductRepository productRepository) : IProductServ
         };
 
         await productRepository.AddProductAsync(product);
+        var savedProduct = productRepository.GetProductByIdAsync(product.Id);
 
         return new ProductResponseDto
         {
