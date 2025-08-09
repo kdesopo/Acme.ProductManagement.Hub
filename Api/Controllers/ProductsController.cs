@@ -2,6 +2,8 @@ using Acme.ProductManagement.Domain.Dtos;
 using Acme.ProductManagement.Domain.Interfaces;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 
 namespace Acme.ProductManagement.Hub.API.Controllers
 {
@@ -58,6 +60,10 @@ namespace Acme.ProductManagement.Hub.API.Controllers
             {
                 var response = await productService.RegisterNewProductAsync(productRequest);
                 return CreatedAtAction(nameof(GetProduct), new { id = response.Id }, response);
+            }
+            catch (DbUpdateException dbuEx) when (dbuEx.InnerException is SqliteException sqliteEx && sqliteEx.SqliteErrorCode == 19)
+            {
+                return Problem(statusCode: 400, title: "Bad Request", detail: dbuEx.InnerException.Message);
             }
             catch (Exception ex)
             {
