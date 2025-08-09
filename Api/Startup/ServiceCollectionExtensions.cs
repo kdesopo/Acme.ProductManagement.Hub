@@ -1,6 +1,7 @@
 ﻿using Acme.ProductManagement.Data.Contexts;
 using Acme.ProductManagement.Data.Repositories;
-using Acme.ProductManagement.Data.Repositories.Interfaces;
+using Acme.ProductManagement.Domain.Interfaces;
+using Acme.ProductManagement.Domain.Services;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -38,7 +39,7 @@ namespace Acme.ProductManagement.Api.Startup
 
         public static IServiceCollection ConfigureServiceLayer(this IServiceCollection services)
         {
-            // TODO: Wire up service layer once implemented
+            services.AddScoped<IProductService, ProductService>();
             return services;
         }
     }

@@ -9,5 +9,5 @@ public class Product
     public int Quantity { get; set; }
     public DateTime DateAdded { get; set; } = DateTime.UtcNow;
     public int ProductCategoryId { get; set; }
-    public required ProductCategory ProductCategory { get; set; }
+    public ProductCategory ProductCategory { get; set; }
 }
