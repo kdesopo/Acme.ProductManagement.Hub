@@ -8,9 +8,10 @@ public class ProductEntityTypeConfiguration : IEntityTypeConfiguration<Product>
 {
     public void Configure(EntityTypeBuilder<Product> builder)
     {
-        // configure the Product entity
         builder.ToTable("Product");
         builder.HasKey(p => p.Id);
+        builder.HasIndex(p => new { p.Code, p.SKU })
+            .IsUnique();
         builder.Property(p => p.Id)
             .ValueGeneratedOnAdd();
         builder.Property(p => p.Name)
