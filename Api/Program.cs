@@ -1,7 +1,5 @@
 using Acme.ProductManagement.Api.Startup;
 
-using Api;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -28,6 +26,11 @@ if (app.Environment.IsEnvironment("Local"))
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors(builder =>
+    builder.WithOrigins("http://localhost:5173")
+           .AllowAnyHeader()
+           .AllowAnyMethod());
 
 app.MapControllers();
 
