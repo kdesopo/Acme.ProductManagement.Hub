@@ -21,16 +21,20 @@ if (app.Environment.IsEnvironment("Local"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.UseCors(policyBuilder =>
+        policyBuilder
+            .SetIsOriginAllowed(origin =>
+                origin.StartsWith("http://localhost") ||
+                origin.StartsWith("https://localhost"))
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .SetPreflightMaxAge(TimeSpan.FromMinutes(10)));
 }
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
-app.UseCors(builder =>
-    builder.WithOrigins("http://localhost:5173")
-           .AllowAnyHeader()
-           .AllowAnyMethod());
 
 app.MapControllers();
 
